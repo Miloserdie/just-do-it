@@ -1,0 +1,139 @@
+.item-tasks {
+	width: 250px;
+	display: flex;
+	margin: 3px;
+	margin-right: 3px;
+	background: rgb(255, 255, 255);
+	box-shadow: 0 2px 2px 0 rgba(26, 24, 29, 0.164), 0 1px 3px 0 rgba(26, 24, 29, 0.116);
+	border: 1px solid rgb(185, 185, 185);
+
+	&__status-info {
+		width: 28px;
+		flex-shrink: 0;
+		display: flex;
+
+		&.in-progress {
+			background-color: rgb(255, 190, 93);
+		}
+
+		&.done {
+			background-color: rgb(36, 204, 143);
+		}
+	}
+
+	&__status-btn {
+		margin: 25px auto;
+		width: 18px;
+		height: 18px;
+	}
+
+	&__text {
+		padding: 10px 5px;
+		flex-shrink: 1;
+	}
+
+	&__title {
+		font-size: 14px;
+		font-weight:700;
+		margin-bottom: 10px;
+		-webkit-line-clamp: 5;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	&__discription {
+		font-size: 13px;
+		-webkit-line-clamp: 10;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	&__options {
+		width: 20px;
+		flex-shrink: 0;
+	}
+
+	&__options-checkbox {
+		display: none;
+
+		&:checked ~ .item-tasks__options-label {
+			.item-tasks__options-dropdown {
+				display: block;
+			}
+		} 
+	}
+
+	&__options-label {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 30px;
+		margin-top: 5px;
+
+		&:hover {
+			.item-options {
+				background-color: rgb(164, 0, 214);
+
+				&::before,
+				&::after {
+					background-color: rgb(164, 0, 214);
+				}
+			}
+		}
+	}
+
+	&__options-dropdown {
+		position: absolute;
+		background-color: rgb(255, 255, 255);
+		width: 140px;
+		border: 1px solid rgb(196, 196, 196);
+		top: 100%;
+		right: 30%;
+		display: none;
+	}
+}
+
+.item-options {
+	position: relative;
+	width: 5px;
+	height: 5px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	background-color: rgb(150, 150, 150);
+
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background-color: rgb(150, 150, 150);
+	}
+
+	&::after {
+		bottom: -7px;
+	}
+
+	&::before {
+		top: -7px;
+	}
+}
+
+.item-dropdown{
+	padding: 3px 0;
+	padding-left: 20px;
+
+	&:hover {
+		background-color: rgba(105, 3, 201, 0.164);
+	}
+
+	&_delete {
+		color: red;
+	}
+}
