@@ -6,6 +6,11 @@
 	background: rgb(255, 255, 255);
 	box-shadow: 0 2px 2px 0 rgba(26, 24, 29, 0.164), 0 1px 3px 0 rgba(26, 24, 29, 0.116);
 	border: 1px solid rgb(185, 185, 185);
+	border-radius: 4px;
+
+		&:hover {
+			border-color: #a33df7;
+		}
 
 	&__status-info {
 		width: 28px;
@@ -17,7 +22,7 @@
 		}
 
 		&.done {
-			background-color: #24cc8f;
+			background-color: rgb(36, 204, 143);
 		}
 	}
 
@@ -28,6 +33,7 @@
 		outline: none;
 		border: none;
 		background: none;
+		cursor: pointer;
 
 		&.in-progress {
 			background-color: rgb(255, 209, 140);

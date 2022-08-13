@@ -1,5 +1,5 @@
 import { ACTION_ADD_TODO, ACTION_DELETE_TODO, ACTION_SET_TODOS, ACTION_UPDATE_TODO } from "./types";
-import { getTodosReq, updateTodoReq } from '../../components/todosApi';
+import { getTodosReq, addTodoReq, updateTodoReq } from '../../components/todosApi';
 
 export function setTodosAction(todos) {
 	return {
@@ -15,6 +15,13 @@ export function updateTodoAction(id, todo) {
 	}
 }
 
+export function addTodoAction(todo) {
+	return {
+		type: ACTION_UPDATE_TODO,
+		payload: todo
+	}
+}
+
 export function getTodosReqAction() {
 	return async function(dispatch) {
 		try{
@@ -25,6 +32,13 @@ export function getTodosReqAction() {
 			console.warn(e);
 		}
 	}
+}
+
+export function addTodoReqAction() {
+	return async function(dispatch) {
+		await addTodoReq()
+	}
+
 }
 
 export function updateTodoReqAction(id, task) {

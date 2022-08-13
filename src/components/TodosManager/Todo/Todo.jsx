@@ -11,8 +11,6 @@ export default function Todo({todo, onUpdate}) {
 			discription: todo.discription
 		}
 
-		// console.log(updatedTodo)  
-
 		onUpdate(todo.id, updatedTodo); 
 	}
 	
