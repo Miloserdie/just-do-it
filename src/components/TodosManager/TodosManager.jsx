@@ -8,11 +8,11 @@ export default function TodosManager() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		async function getTodos() {
+		function getTodos() {
 			dispatch(getTodosReqAction());
 		}
 
-		getTodos();
+		getTodos(); 
 	}, []);
 
 	async function updateTodo(id, task) {

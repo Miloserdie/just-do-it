@@ -18,7 +18,7 @@ export function updateTodoAction(id, todo) {
 export function getTodosReqAction() {
 	return async function(dispatch) {
 		try{
-			const todos = await getTodosReq();
+			const todos = await getTodosReq(); 
 
 			dispatch(setTodosAction(todos));
 		} catch(e) {

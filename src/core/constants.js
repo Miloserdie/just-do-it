@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://just-do-it-a59df-default-rtdb.europe-west1.firebasedatabase.app/todos.json';
