@@ -6,7 +6,7 @@ export default function Todo({todo}) {
 	return (
 		<li className="item-tasks">
 			<div className={`item-tasks__status-info ${status}`}>
-				<button className='item-tasks__status-btn'></button>
+				<button className={`item-tasks__status-btn ${status}`}></button>
 			</div>
 			<div className="item-tasks__text">
 				<h5 className="item-tasks__title">{todo.task}</h5>
@@ -14,13 +14,13 @@ export default function Todo({todo}) {
 			</div>
 			<div className="item-tasks__options">
 				<input name="options" className="item-tasks__options-checkbox" type="checkbox" id={`options-checkbox-${todo.id}`}/>
-				<label className="item-tasks__options-label" htmlFor={`options-checkbox-${todo.id}`}>
+				<label tabIndex={0} className="item-tasks__options-label" htmlFor={`options-checkbox-${todo.id}`}>
 					<div className='item-options'></div>
 					<ul className='item-tasks__options-dropdown'>
 						<li className='item-dropdown'>Редагувати</li>
 						<li className='item-dropdown item-dropdown_delete'>Видалити</li>
 					</ul>
-				</label>
+				</label> 
 			</div>
 		</li>
 	)
