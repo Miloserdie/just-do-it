@@ -7,3 +7,7 @@ export async function getTodosReq() {
 
 	return res.data;
 }
+
+export async function updateTodoReq(id, todo) {
+	await api.put(`${TODOS_URL}/${id}`, {...todo});
+}

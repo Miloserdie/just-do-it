@@ -1,12 +1,25 @@
 import './Todo.scss'
 
-export default function Todo({todo}) {
+export default function Todo({todo, onUpdate}) {
 	const status = todo.status ? 'done' : 'in-progress';
+
+	function changeStatus() {
+		const updatedTodo = {
+			task: todo.task,
+			id: todo.id,
+			status: !todo.status,
+			discription: todo.discription
+		}
+
+		// console.log(updatedTodo)  
+
+		onUpdate(todo.id, updatedTodo); 
+	}
 	
 	return (
 		<li className="item-tasks">
 			<div className={`item-tasks__status-info ${status}`}>
-				<button className={`item-tasks__status-btn ${status}`}></button>
+				<button onClick={changeStatus} className={`item-tasks__status-btn ${status}`}></button>
 			</div>
 			<div className="item-tasks__text">
 				<h5 className="item-tasks__title">{todo.task}</h5>

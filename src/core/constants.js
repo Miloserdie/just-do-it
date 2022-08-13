@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://my-json-server.typicode.com/Miloserdie/my-rest-api';
+export const BASE_URL = 'http://localhost:3000';
