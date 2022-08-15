@@ -1,5 +1,5 @@
 import { ACTION_ADD_TODO, ACTION_DELETE_TODO, ACTION_SET_TODOS, ACTION_UPDATE_TODO } from "./types";
-import { getTodosReq, addTodoReq, updateTodoReq } from '../../components/todosApi';
+import { getTodosReq, addTodoReq, updateTodoReq, deleteTodoReq } from '../../components/todosApi';
 
 export function setTodosAction(todos) {
 	return {
@@ -17,8 +17,15 @@ export function updateTodoAction(id, todo) {
 
 export function addTodoAction(todo) {
 	return {
-		type: ACTION_UPDATE_TODO,
+		type: ACTION_ADD_TODO,
 		payload: todo
+	}
+}
+
+export function deleteTodoAction(id) {
+	return {
+		type: ACTION_DELETE_TODO,
+		payload: id
 	}
 }
 
@@ -34,19 +41,36 @@ export function getTodosReqAction() {
 	}
 }
 
-export function addTodoReqAction() {
+export function addTodoReqAction(todo) {
 	return async function(dispatch) {
-		await addTodoReq()
-	}
+		try {
+			await addTodoReq(todo);
 
+			dispatch(addTodoAction(todo));
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
-export function updateTodoReqAction(id, task) {
+export function updateTodoReqAction(id, todo) {
 	return async function(dispatch) {
 		try{
-			await updateTodoReq(id, task);
+			await updateTodoReq(id, todo);
 		
-			dispatch(updateTodoAction(id, task));
+			dispatch(updateTodoAction(id, todo));
+		} catch(e) {
+			console.warn(e);
+		}
+	}
+}
+
+export function deleteTodoReqAction(id) {
+	return async function(dispatch) {
+		try{
+			await deleteTodoReq(id);
+		
+			dispatch(deleteTodoAction(id));
 		} catch(e) {
 			console.warn(e);
 		}

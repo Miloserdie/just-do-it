@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getTodosReqAction, updateTodoReqAction } from "../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTodoReqAction, getTodosReqAction, updateTodoReqAction } from "../../store/actions";
 import TodoLIst from "./TodoList/TodoList";
 import './TodosManager.scss'
-import AddTodo from "./AddTodo/AddTodo";
+import AddTodoFrom from "./AddTodoFrom/AddTodoFrom";
 
 export default function TodosManager() {
+	const todos = useSelector(state => state.todos);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -17,14 +18,21 @@ export default function TodosManager() {
 	}, []);
 
 	async function updateTodo(id, task) {
-		dispatch(updateTodoReqAction(id, task))
+		dispatch(updateTodoReqAction(id, task));
+	}
+
+	function deleteTodo(id) {
+		dispatch(deleteTodoReqAction(id));
 	}
 
 	return (
 		<section className="tasks">
 			<div className="container">
-				<AddTodo></AddTodo>
-				<TodoLIst onUpdate={updateTodo}></TodoLIst>
+				<div className="content">
+					<AddTodoFrom></AddTodoFrom>
+					<h1 className="tasks__title">Усього завдань: <span>{todos.length}</span></h1>
+					<TodoLIst onDelete={deleteTodo} onUpdate={updateTodo}></TodoLIst>
+				</div>
 			</div>
 		</section>
 	)

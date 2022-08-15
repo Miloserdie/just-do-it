@@ -9,7 +9,8 @@
 	border-radius: 4px;
 
 		&:hover {
-			border-color: #a33df7;
+			border-color: rgb(163, 61, 247);
+			z-index: 1;
 		}
 
 	&__status-info {
@@ -56,13 +57,14 @@
 		padding: 10px 5px;
 		flex-basis: 100%;
 		flex-shrink: 1;
+		word-break: break-word;
 	}
 
 	&__title {
 		font-size: 14px;
 		font-weight:700;
 		margin-bottom: 10px;
-		-webkit-line-clamp: 5;
+		-webkit-line-clamp: 3;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
@@ -81,17 +83,7 @@
 		flex-shrink: 0;
 	}
 
-	&__options-checkbox {
-		display: none;
-
-		&:checked ~ .item-tasks__options-label {
-			.item-tasks__options-dropdown {
-				display: block;
-			}
-		} 
-	}
-
-	&__options-label {
+	&__options-btn {
 		position: relative;
 		display: block;
 		width: 100%;
@@ -108,17 +100,23 @@
 					background-color: rgb(164, 0, 214);
 				}
 			}
+
+			.item-tasks__options-dropdown {
+				display: block;
+				opacity: 1;
+				transition-duration: 0.2s;
+			}
 		}
 	}
 
 	&__options-dropdown {
 		position: absolute;
 		background-color: rgb(255, 255, 255);
-		width: 140px;
 		border: 1px solid rgb(196, 196, 196);
 		top: 100%;
 		right: 30%;
-		display: none;
+		opacity: 0;
+		transition-duration: 1.5s;
 	}
 }
 
@@ -153,14 +151,49 @@
 }
 
 .item-dropdown{
-	padding: 3px 0;
-	padding-left: 20px;
-
 	&:hover {
 		background-color: rgba(105, 3, 201, 0.164);
 	}
 
-	&_delete {
-		color: red;
+	button {
+		display: block;
+		width: 150px;
+		height: 100%;
+		padding: 5px 15px;
+		background: none;
+		border: none;
+		text-align: left;
+		display: flex;
+		justify-content: space-between;
+		font-size: 14px;
+		color: rgb(163, 61, 247);
+		font-weight: 600;
+
+		span {
+			display: block;
+			margin-top: 3px;
+		}
+
+		&::before{
+			content: '';
+			width: 20px;
+			height: 20px;
+			justify-self: flex-start;
+		}
+
+		&.edit-btn {
+			&::before {
+				background: url('https://img.icons8.com/ios-glyphs/30/a33df7/edit--v1.png') center/ contain no-repeat;
+			}
+		}
+
+		&.delete-btn {
+			color: rgb(231, 76, 60);
+			&::before {
+				background: url('https://img.icons8.com/material-outlined/24/E74C3C/trash--v1.png') center/ contain no-repeat;
+			}
+		}
 	}
+
+	
 }

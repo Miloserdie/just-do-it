@@ -1,0 +1,29 @@
+.task__add-task-form {
+	margin-bottom: 20px;
+}
+
+.add-task-form__input {
+	background: none;
+	outline: none;
+	max-width: 500px;
+	padding: 15px 15px;
+	color: black;
+	font-size: 15px;
+	font-weight: 700;
+	border: none;
+	background-color: rgb(225, 223, 226);
+	transition-duration: 0.2s;
+
+	&:hover {
+		background-color: rgb(216, 214, 217);
+	}
+
+	&:focus {
+		background-color: rgb(255, 255, 255);
+		border: 1px solid rgb(164, 0, 214);
+	}
+}
+
+.add-task-form__btn {
+	display: none;
+}

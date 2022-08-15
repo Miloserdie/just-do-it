@@ -1,7 +1,5 @@
-import api from "../core/api";
-import { collection, getDocs, query, onSnapshot, doc, updateDoc, deleteDoc, QuerySnapshot, addDoc } from "firebase/firestore";
+import { collection, getDocs, query, doc, updateDoc, deleteDoc, QuerySnapshot, addDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { async } from "@firebase/util";
 
 const TODOS_URL = 'todos';
 
@@ -9,7 +7,7 @@ export async function getTodosReq() {
 	const docs = await getDocs(collection(db, TODOS_URL));
 
 	return docs.docs.map((todo) => {
-		return ({...todo.data(), id: todo.id})
+		return ({...todo.data()})
 		}
 	)
 }
@@ -19,5 +17,9 @@ export async function updateTodoReq(id, todo) {
 }
 
 export async function addTodoReq(todo) {
-	await addDoc(collection(db, TODOS_URL), {...todo})
+	await setDoc(doc(db, TODOS_URL, todo.id), todo);
+}
+
+export async function deleteTodoReq(id) {
+	await deleteDoc(doc(db, TODOS_URL, id));
 }
