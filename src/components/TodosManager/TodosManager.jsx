@@ -17,12 +17,16 @@ export default function TodosManager() {
 		getTodos(); 
 	}, []);
 
-	async function updateTodo(id, task) {
+	function updateTodo(id, task) {
 		dispatch(updateTodoReqAction(id, task));
 	}
 
 	function deleteTodo(id) {
-		dispatch(deleteTodoReqAction(id));
+		let question = window.confirm("Ви дійсно хочете видалити Завдання?");
+
+		if(question) {
+			dispatch(deleteTodoReqAction(id));
+		}
 	}
 
 	return (
