@@ -1,23 +1,43 @@
 import './ModalForTodo.scss'
 import Modal from '../../../Modal/Modal'
 import { Formik, Form, Field } from 'formik'
+import { updateTodoReqAction } from '../../../store/actions';
+import { useDispatch } from 'react-redux';
 
-export default function ModalForTodo({todo, active, setActive}) {
+export default function ModalForTodo({todo, active, setActive, onDelete}) {
 	const status = todo.status ? 'done' : 'in-progress';
+	const dispatch = useDispatch();
+
+	function canselChanges(formik) {
+		setActive(false);
+
+		formik.resetForm(todo);
+	}
+
+	function saveTodo(values) {
+		dispatch(updateTodoReqAction(todo.id, values));
+		console.log(values)
+
+		setActive(false);
+	}
 
 	return (
 		<Modal active={active} setActive={setActive}>
 				<Formik
 								initialValues={todo}
+								enableReinitialize={true}
 							>
-								{() => (
-									<Form>
+								{(formik) => (
+									<Form onSubmit={(e) => {
+										e.preventDefault();
+										saveTodo(formik.values);
+									}}>
 										<div className={`modal__top ${status}`}>
 											<div className='modal__top-head'>
 												<h3 className='modal__top-title'>Редагувати Завдання</h3>
 												<div className='modal__top-btns'>
-													<button className='modal-cansel-btn modal-btn'>Скасувати</button>
-													<button className='modal-save-btn modal-btn'>Зберегти</button>
+													<button className='modal-cansel-btn modal-btn' onClick={() => canselChanges(formik)}>Скасувати</button>
+													<button disabled={formik.isSubmitting || !formik.dirty || !formik.isValid} type='submit' className='modal-save-btn modal-btn'>Зберегти</button>
 												</div>
 											</div>
 											<div className='modal__top-body'>
@@ -29,7 +49,7 @@ export default function ModalForTodo({todo, active, setActive}) {
 										</div>
 										<div className='modal__bottom'>
 											<div className='modal__bottom-btn'>
-												<button className='modal-delete-btn modal-btn'><span>Видалити завдання</span></button>
+												<button className='modal-delete-btn modal-btn' onClick={() => onDelete()}><span>Видалити завдання</span></button>
 											</div>
 										</div>
 									</Form>

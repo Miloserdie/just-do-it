@@ -30,16 +30,18 @@ export default function Todo({todo}) {
 	}
 
 	function deleteTodo () {
-		let question = window.confirm("Ви дійсно хочете видалити Завдання?");
+		let question = window.confirm("Ви дійсно бажаєте видалити Завдання?");
 
 		if(question) {
 			dispatch(deleteTodoReqAction(todo.id));
+
+			setModalActive(false);
 		}
 	}
 	
 	return (
 		<>
-			<ModalForTodo todo={todo} active={modalActive} setActive={setModalActive}/>
+			<ModalForTodo onDelete={deleteTodo} todo={todo} active={modalActive} setActive={setModalActive}/>
 			<li className="item-tasks">
 				<div className={`item-tasks__status-info ${status}`}>
 					<button onClick={changeStatus} className={`item-tasks__status-btn ${status}`}></button>

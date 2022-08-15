@@ -26,4 +26,8 @@
 
 .add-task-form__btn {
 	display: none;
+
+	&:disabled {
+		color: white;
+	}
 }
