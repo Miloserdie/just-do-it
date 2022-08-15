@@ -1,0 +1,139 @@
+.modal__top {
+	padding: 20px;
+	border-radius: 8px 8px 0 0;
+	
+
+	&.in-progress {
+		background-color: rgb(255, 190, 93);
+	}
+
+	&.done {
+		background-color: rgb(36, 204, 143);
+	}
+}
+
+.modal__top-head {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.modal__top-title {
+	font-size: 20px;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.modal__top-btns {
+	padding-top: 3px;
+}
+
+.modal-btn {
+	font-size: 14px;
+	background: none;
+	border: none;
+	outline: none;
+	color: rgba(0, 0, 0, 0.6);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.modal-cansel-btn {
+	margin-right: 10px;
+	padding: 5px;
+	
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.modal-save-btn {
+	color: rgb(0, 0, 0);
+	padding: 8px 12px;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.404);
+	background-color: rgb(255, 255, 255);
+	border-radius: 4px;
+
+	&:hover {
+		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.404);
+		color: rgb(163, 61, 247);
+	}
+}
+
+.modal__top-body {
+	font-size: 22px;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.modal__task-title {
+	margin-bottom: 8px;
+}
+
+.modal__input {
+	background-color: rgba(255, 255, 255, 0.308);
+	border: none;
+	outline: none;
+	width: 100%;
+	font-size: 18px;
+	padding: 10px 14px;
+	color: rgba(0, 0, 0, 0.61);
+	margin-bottom: 14px;
+	border-radius: 3px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.521);
+	}
+
+	&:focus {
+		border: 1px solid rgb(163, 61, 247);
+	}
+}
+
+.modal__discription-title {
+	margin-bottom: 8px;
+	resize: none;
+}
+
+.modal__input-discription {
+	resize: none;
+	height: 200px;
+}
+
+.modal__bottom {
+	background-color: rgb(255, 255, 255);
+	padding: 20px;
+	border-radius: 0 0 8px 8px;
+	
+}
+
+.modal__bottom-btn {
+	display: flex;
+	justify-content: center;
+}
+
+.modal-delete-btn {
+	color: red;
+	display: flex;
+	font-size: 16px;
+	padding: 5px;
+
+	span {
+		margin-top: 3px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&::before {
+		content: '';
+		margin-right: 8px;
+		width: 20px;
+		height: 20px;
+		background: url('https://img.icons8.com/material-outlined/24/E74C3C/trash--v1.png') center/ contain no-repeat;
+	}
+}

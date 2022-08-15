@@ -15,12 +15,12 @@ export default function TodosManager() {
 		}
 
 		getTodos(); 
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<section className="tasks">
 			<div className="container">
-				<div className="content">
+				<div className="tasks__content">
 					<AddTodoFrom></AddTodoFrom>
 					<h1 className="tasks__title">Усього завдань: <span>{todos.length}</span></h1>
 					<TodoLIst />

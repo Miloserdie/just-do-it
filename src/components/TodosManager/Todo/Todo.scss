@@ -185,6 +185,17 @@
 			}
 		}
 	}
+}
 
-	
+@media screen and(max-width:1083px){
+	.item-tasks {
+		margin: 3px auto;
+	}
+}
+
+@media screen and(max-width:829px){
+	.item-tasks {
+		flex-grow: 1;
+		margin: 3px;
+	}
 }

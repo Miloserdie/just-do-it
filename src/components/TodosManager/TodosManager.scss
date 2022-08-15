@@ -1,13 +1,16 @@
-.container {
-	max-width: 1086px;
-	margin: 0 auto;
-	padding: 0 20px;
-}
+.tasks {
 
-.content {
-	background: rgb(237, 236, 238);
-	padding: 10px;
-	min-height: 100vh;
+	.container {
+		max-width: 1086px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	&__content {
+		background: rgb(237, 236, 238);
+		padding: 10px;
+		min-height: 100vh;
+	}
 }
 
 .tasks__title {
