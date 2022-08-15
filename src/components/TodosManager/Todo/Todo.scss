@@ -84,15 +84,11 @@
 	}
 
 	&__options-dropdown {
-		// display: none;
-		position: absolute;
 		background-color: rgb(255, 255, 255);
 		border: 1px solid rgb(196, 196, 196);
+		position: absolute;
 		top: 100%;
 		right: 30%;
-		opacity: 0;
-		transition-duration: 1.5s;
-		width: 0;
 	}
 
 	&__options-btn {
@@ -110,12 +106,6 @@
 				&::after {
 					background-color: rgb(164, 0, 214);
 				}
-			}
-
-			.item-tasks__options-dropdown {
-				// display: block;
-				opacity: 1;
-				transition-duration: 0.2s;
 			}
 		}
 	}

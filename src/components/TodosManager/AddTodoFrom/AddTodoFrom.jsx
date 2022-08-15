@@ -7,8 +7,12 @@ export default function AddTodoFrom() {
 	const dispatch = useDispatch();
 
 	function makeTodo(values) {
+		if(!values.task.trim()) {
+			return;
+		}
+
 		const todo = {
-			...values,
+			task: values.task.trim(),
 			status: false,
 			discription: '',
 			id: Math.random().toString(20).substring(2)

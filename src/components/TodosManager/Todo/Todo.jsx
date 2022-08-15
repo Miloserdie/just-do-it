@@ -1,7 +1,16 @@
+import React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useClickOutside } from '../../../hooks/useClickOutside';
+import { deleteTodoReqAction, updateTodoReqAction } from '../../../store/actions';
 import './Todo.scss'
 
-export default function Todo({todo, onUpdate, onDelete}) {
+export default function Todo({todo}) {
+	const dispatch = useDispatch();
 	const status = todo.status ? 'done' : 'in-progress';
+	const [activeEditor, setActiveEditor] = useState(false);
+	const clickRef = React.useRef();
+	useClickOutside(clickRef, () => setActiveEditor(false));
 
 	function changeStatus() {
 		const updatedTodo = {
@@ -11,7 +20,19 @@ export default function Todo({todo, onUpdate, onDelete}) {
 			discription: todo.discription
 		}
 
-		onUpdate(todo.id, updatedTodo); 
+		dispatch(updateTodoReqAction(todo.id, updatedTodo));
+	}
+
+	function onItemClick() {
+		setActiveEditor(x => !x);
+	}
+
+	function deleteTodo () {
+		let question = window.confirm("Ви дійсно хочете видалити Завдання?");
+
+		if(question) {
+			dispatch(deleteTodoReqAction(todo.id));
+		}
 	}
 	
 	return (
@@ -24,16 +45,18 @@ export default function Todo({todo, onUpdate, onDelete}) {
 				<p className="item-tasks__discription">{todo.discription}</p>
 			</div>
 			<div className="item-tasks__options">
-				<div className="item-tasks__options-btn">
-					<div  className='item-options'></div>
-					<ul className='item-tasks__options-dropdown'>
+				<div className="item-tasks__options-btn" onClick={onItemClick} ref={clickRef}>
+					<div className='item-options'/>
+					{activeEditor && 
+						<ul className={`item-tasks__options-dropdown`}>
 						<li className='item-dropdown'>
 							<button className='edit-btn'><span>Редагувати</span></button>
 						</li>
 						<li className='item-dropdown'>
-							<button className='delete-btn' onClick={() => onDelete(todo.id)}><span>Видалити</span></button>
+							<button className='delete-btn' onClick={deleteTodo}><span>Видалити</span></button>
 						</li>
 					</ul>
+					}
 				</div>
 			</div>
 		</li>
