@@ -2,9 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useClickOutside } from '../../../hooks/useClickOutside';
-import { deleteTodoReqAction, updateTodoReqAction } from '../../../store/actions';
 import ModalForTodo from '../ModalForTodo/ModalForTodo';
 import './Todo.scss';
+import {deleteTodoReqAction, updateTodoReqAction} from "../../../store/reducer";
 
 export default function Todo({todo}) {
 	const dispatch = useDispatch();
@@ -16,10 +16,8 @@ export default function Todo({todo}) {
 
 	function changeStatus() {
 		const updatedTodo = {
-			task: todo.task,
-			id: todo.id,
+			...todo,
 			status: !todo.status,
-			discription: todo.discription
 		}
 
 		dispatch(updateTodoReqAction(todo.id, updatedTodo));
@@ -38,7 +36,7 @@ export default function Todo({todo}) {
 			setModalActive(false);
 		}
 	}
-	
+
 	return (
 		<>
 			<ModalForTodo onDelete={deleteTodo} todo={todo} active={modalActive} setActive={setModalActive}/>
@@ -53,15 +51,16 @@ export default function Todo({todo}) {
 				<div className="item-tasks__options">
 					<div className="item-tasks__options-btn" onClick={onItemClick} ref={clickRef}>
 						<div className='item-options'/>
-						{activeEditor && 
+						{activeEditor &&
 							<ul className={`item-tasks__options-dropdown`}>
-							<li className='item-dropdown'>
-								<button className='edit-btn' onClick={() => setModalActive(true)}><span>Редагувати</span></button>
-							</li>
-							<li className='item-dropdown'>
-								<button className='delete-btn' onClick={deleteTodo}><span>Видалити</span></button>
-							</li>
-						</ul>
+								<li className='item-dropdown'>
+									<button className='edit-btn' onClick={() => setModalActive(true)}><span>Редагувати</span>
+									</button>
+								</li>
+								<li className='item-dropdown'>
+									<button className='delete-btn' onClick={deleteTodo}><span>Видалити</span></button>
+								</li>
+							</ul>
 						}
 					</div>
 				</div>

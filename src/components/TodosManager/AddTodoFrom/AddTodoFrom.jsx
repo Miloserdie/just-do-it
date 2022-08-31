@@ -1,7 +1,7 @@
 import './AddTodoFrom.scss';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
-import { addTodoReqAction } from '../../../store/actions';
+import {addTodoReqAction} from "../../../store/reducer";
 
 export default function AddTodoFrom() {
 	const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export default function AddTodoFrom() {
 			task: values.task.trim(),
 			status: false,
 			discription: '',
-			id: Math.random().toString(20).substring(2)
+			id: Math.random().toString(20).substring(2),
 		}
 
 		dispatch(addTodoReqAction(todo));

@@ -1,4 +1,4 @@
-import { collection, getDocs, query, doc, updateDoc, deleteDoc, QuerySnapshot, addDoc, setDoc } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, deleteDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const TODOS_URL = 'todos';
@@ -6,8 +6,8 @@ const TODOS_URL = 'todos';
 export async function getTodosReq() {
 	const docs = await getDocs(collection(db, TODOS_URL));
 
-	return docs.docs.map((todo) => {
-		return ({...todo.data()})
+	return docs.docs.map((todos) => {
+		return ({...todos.data()})
 		}
 	)
 }
