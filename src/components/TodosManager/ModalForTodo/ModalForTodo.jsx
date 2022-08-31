@@ -16,7 +16,6 @@ export default function ModalForTodo({todo, active, setActive, onDelete}) {
 
 	function saveTodo(values) {
 		dispatch(updateTodoReqAction(todo.id, values));
-		console.log(values)
 
 		setActive(false);
 	}
@@ -30,7 +29,6 @@ export default function ModalForTodo({todo, active, setActive, onDelete}) {
 				{(formik) => (
 					<Form onSubmit={(e) => {
 						e.preventDefault();
-						saveTodo(formik.values);
 					}}>
 						<div className={`modal__top ${status}`}>
 							<div className='modal__top-head'>
@@ -39,7 +37,7 @@ export default function ModalForTodo({todo, active, setActive, onDelete}) {
 									<button className='modal-cansel-btn modal-btn'
 											  onClick={() => canselChanges(formik)}>Скасувати
 									</button>
-									<button disabled={formik.isSubmitting || !formik.dirty || !formik.isValid} type='submit'
+									<button disabled={formik.isSubmitting || !formik.dirty || !formik.isValid} onClick={() => saveTodo(formik.values)}
 											  className='modal-save-btn modal-btn'>Зберегти
 									</button>
 								</div>
@@ -56,7 +54,8 @@ export default function ModalForTodo({todo, active, setActive, onDelete}) {
 						</div>
 						<div className='modal__bottom'>
 							<div className='modal__bottom-btn'>
-								<button className='modal-delete-btn modal-btn' onClick={() => onDelete()}><span>Видалити завдання</span>
+								<button className='modal-delete-btn modal-btn' onClick={() => onDelete()}>
+									<span>Видалити завдання</span>
 								</button>
 							</div>
 						</div>

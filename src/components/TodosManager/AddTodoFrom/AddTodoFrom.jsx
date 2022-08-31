@@ -11,11 +11,14 @@ export default function AddTodoFrom() {
 			return;
 		}
 
+		const date = new Date().toLocaleString();
+
 		const todo = {
 			task: values.task.trim(),
 			status: false,
 			discription: '',
 			id: Math.random().toString(20).substring(2),
+			createdDate: `${date.substring(0, 10)} ${date.substring(11)}`
 		}
 
 		dispatch(addTodoReqAction(todo));
