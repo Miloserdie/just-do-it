@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useClickOutside } from '../../../hooks/useClickOutside';
-import ModalForTodo from '../ModalForTodo/ModalForTodo';
-import './Todo.scss';
+import ModalForTodo from '../ModalForTodo';
+import './style.scss';
 import {deleteTodoReqAction, updateTodoReqAction} from "../../../store/reducer";
 
 export default function Todo({todo}) {
@@ -46,7 +46,7 @@ export default function Todo({todo}) {
 				</div>
 				<div className="item-tasks__text">
 					<h5 className="item-tasks__title">{todo.task}</h5>
-					<p className="item-tasks__discription">{todo.discription}</p>
+					<p className="item-tasks__discription">{todo.description}</p>
 				</div>
 				<div className="item-tasks__options">
 					<div className="item-tasks__options-btn" onClick={onItemClick} ref={clickRef}>

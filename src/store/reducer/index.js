@@ -8,7 +8,12 @@ const todosSlice = createSlice({
     },
     reducers: {
         setTodosAction(state, {payload}) {
-            state.todos = payload
+
+            state.todos = payload?.sort((a, b) => {
+                a = new Date(a.createdDate);
+                b = new Date(b.createdDate);
+                return a > b ? -1 : a < b ? 1 : 0;
+            });
         },
 
         updateTodoAction(state, {payload}) {

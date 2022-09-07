@@ -7,6 +7,7 @@
 	box-shadow: 0 2px 2px 0 rgba(26, 24, 29, 0.164), 0 1px 3px 0 rgba(26, 24, 29, 0.116);
 	border: 1px solid rgb(185, 185, 185);
 	border-radius: 4px;
+	transition-duration: 0.2s;
 
 		&:hover {
 			border-color: rgb(163, 61, 247);
@@ -17,6 +18,7 @@
 		width: 28px;
 		flex-shrink: 0;
 		display: flex;
+		transition-duration: 0.3s;
 
 		&.in-progress {
 			background-color: rgb(255, 190, 93);
@@ -35,6 +37,7 @@
 		border: none;
 		background: none;
 		cursor: pointer;
+		transition-duration: 0.2s;
 
 		&.in-progress {
 			background-color: rgb(255, 209, 140);
@@ -98,6 +101,7 @@
 		margin-top: 5px;
 		cursor: pointer;
 
+
 		&:hover {
 			.item-options {
 				background-color: rgb(164, 0, 214);
@@ -120,6 +124,7 @@
 	transform: translate(-50%, -50%);
 	border-radius: 50%;
 	background-color: rgb(150, 150, 150);
+	transition-duration: 0.2s;
 
 
 	&::before,
@@ -130,6 +135,7 @@
 		height: 5px;
 		border-radius: 50%;
 		background-color: rgb(150, 150, 150);
+		transition-duration: 0.2s;
 	}
 
 	&::after {

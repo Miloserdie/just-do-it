@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, updateDoc, deleteDoc, setDoc, orderBy } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, deleteDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const TODOS_URL = 'todos';

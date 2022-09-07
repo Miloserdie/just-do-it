@@ -1,9 +1,9 @@
-import './AddTodoFrom.scss';
+import './style.scss';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import {addTodoReqAction} from "../../../store/reducer";
 
-export default function AddTodoFrom() {
+export default function AddTodoForm() {
 	const dispatch = useDispatch();
 
 	function makeTodo(values) {
@@ -16,7 +16,7 @@ export default function AddTodoFrom() {
 		const todo = {
 			task: values.task.trim(),
 			status: false,
-			discription: '',
+			description: '',
 			id: Math.random().toString(20).substring(2),
 			createdDate: `${date.substring(0, 10)} ${date.substring(11)}`
 		}
@@ -30,7 +30,7 @@ export default function AddTodoFrom() {
 		>
 			{formik => (
 				<Form 
-				className='task__add-task-form'
+				className='add-task-form'
 				onSubmit={(e) =>{
 					e.preventDefault()
 					makeTodo(formik.values)

@@ -1,0 +1,34 @@
+.add-task-form {
+	margin-right: 30px;
+
+	&__input {
+		outline: none;
+		max-width: 500px;
+		padding: 15px 15px;
+		color: black;
+		font-size: 15px;
+		font-weight: 700;
+		background-color: rgb(225, 223, 226);
+		border: 1px solid rgb(225, 223, 226);
+		transition-duration: 0.2s;
+		border-radius: 3px;
+
+		&:hover {
+			background-color: rgb(216, 214, 217);
+		}
+
+		&:focus {
+			background-color: rgb(255, 255, 255);
+			border: 1px solid rgb(164, 0, 214);
+		}
+	}
+
+	&__btn {
+		display: none;
+
+		&:disabled {
+			color: white;
+		}
+	}
+
+}
