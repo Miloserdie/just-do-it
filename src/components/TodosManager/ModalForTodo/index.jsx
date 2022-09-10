@@ -5,6 +5,7 @@ import {useDispatch} from 'react-redux';
 import {updateTodoReqAction} from "../../../store/reducer";
 
 export default function ModalForTodo({todo, active, setActive, onDelete}) {
+	const currentUser = JSON.parse(localStorage.getItem('user'));
 	const status = todo.status ? 'done' : 'in-progress';
 	const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ export default function ModalForTodo({todo, active, setActive, onDelete}) {
 	}
 
 	function saveTodo(values) {
-		dispatch(updateTodoReqAction(todo.id, values));
+		dispatch(updateTodoReqAction(todo.id, values, currentUser.uid));
 
 		setActive(false);
 	}

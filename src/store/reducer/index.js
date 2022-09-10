@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addTodoReq, deleteTodoReq, getTodosReq, updateTodoReq} from "../../components/todosApi";
+import {addTodoReq, deleteTodoReq, getTodosReq, updateTodoReq} from "../../api/todosApi";
 
 const todosSlice = createSlice({
     name: 'todos',
@@ -38,10 +38,10 @@ const todosSlice = createSlice({
 export default todosSlice.reducer;
 export const { setTodosAction, updateTodoAction, addTodoAction, deleteTodoAction } = todosSlice.actions;
 
-export function getTodosReqAction() {
+export function getTodosReqAction(uid) {
     return async function(dispatch) {
         try{
-            const todos = await getTodosReq();
+            const todos = await getTodosReq(uid);
 
             dispatch(setTodosAction(todos));
         } catch(e) {
@@ -50,10 +50,10 @@ export function getTodosReqAction() {
     }
 }
 
-export function updateTodoReqAction(id, todo) {
+export function updateTodoReqAction(id, todo, uid) {
     return async function(dispatch) {
         try{
-            await updateTodoReq(id, todo);
+            await updateTodoReq(id, todo, uid);
 
             dispatch(updateTodoAction({id, todo}));
         } catch(e) {
@@ -62,10 +62,10 @@ export function updateTodoReqAction(id, todo) {
     }
 }
 
-export function addTodoReqAction(todo) {
+export function addTodoReqAction(todo, uid) {
     return async function(dispatch) {
         try {
-            await addTodoReq(todo);
+            await addTodoReq(todo, uid);
 
             dispatch(addTodoAction(todo));
         } catch (error) {
@@ -74,10 +74,10 @@ export function addTodoReqAction(todo) {
     }
 }
 
-export function deleteTodoReqAction(id) {
+export function deleteTodoReqAction(id, uid) {
     return async function(dispatch) {
         try{
-            await deleteTodoReq(id);
+            await deleteTodoReq(id, uid);
 
             dispatch(deleteTodoAction(id));
         } catch(e) {

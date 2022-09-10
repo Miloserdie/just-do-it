@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import {addTodoReqAction} from "../../../store/reducer";
 
 export default function AddTodoForm() {
+	const currentUser = JSON.parse(localStorage.getItem('user'));
 	const dispatch = useDispatch();
 
 	function makeTodo(values) {
@@ -21,7 +22,7 @@ export default function AddTodoForm() {
 			createdDate: `${date.substring(0, 10)} ${date.substring(11)}`
 		}
 
-		dispatch(addTodoReqAction(todo));
+		dispatch(addTodoReqAction(todo, currentUser.uid));
 	}
 	
 	return (

@@ -1,0 +1,41 @@
+.header {
+  position: fixed;
+  background-color: rgb(66, 40, 115);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  color: rgb(252, 252, 252);
+  z-index: 100;
+
+  &__title {
+    font-size: 28px;
+    margin-bottom: 5px;
+  }
+
+  &__right {
+    display: flex;
+    font-weight: 600;
+  }
+
+  &__username {
+    margin-right: 15px;
+    align-self: center;
+    margin-bottom: 3px;
+
+    span {
+      color: rgb(36, 202, 142);
+    }
+  }
+
+  &__logout {
+    width: 30px;
+    height: 30px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: url("https://img.icons8.com/external-sbts2018-outline-sbts2018/58/ffffff/external-logout-social-media-basic-1-sbts2018-outline-sbts2018.png") center/ contain no-repeat;
+  }
+}

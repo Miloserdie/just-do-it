@@ -9,6 +9,7 @@ import {deleteTodoReqAction, updateTodoReqAction} from "../../../store/reducer";
 export default function Todo({todo}) {
 	const dispatch = useDispatch();
 	const status = todo.status ? 'done' : 'in-progress';
+	const currentUser = JSON.parse(localStorage.getItem('user'));
 	const [activeEditor, setActiveEditor] = useState(false);
 	const [modalActive, setModalActive] = useState(false);
 	const clickRef = React.useRef();
@@ -20,7 +21,7 @@ export default function Todo({todo}) {
 			status: !todo.status,
 		}
 
-		dispatch(updateTodoReqAction(todo.id, updatedTodo));
+		dispatch(updateTodoReqAction(todo.id, updatedTodo, currentUser.uid));
 	}
 
 	function onItemClick() {
@@ -31,7 +32,7 @@ export default function Todo({todo}) {
 		let question = window.confirm("Ви дійсно бажаєте видалити Завдання?");
 
 		if(question) {
-			dispatch(deleteTodoReqAction(todo.id));
+			dispatch(deleteTodoReqAction(todo.id, currentUser.uid));
 
 			setModalActive(false);
 		}

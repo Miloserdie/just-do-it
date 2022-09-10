@@ -5,13 +5,19 @@ import AddTodoForm from "./AddTodoForm";
 import {getTodosReqAction} from "../../store/reducer";
 import TodoList from "./TodoList";
 import {Helmet} from "react-helmet";
+import {getUserReq} from "../../api/usersApi";
+import {Navigate} from "react-router-dom";
+import Header from "../Header";
 
 export default function TodosManager() {
+    const currentUser = JSON.parse(localStorage.getItem('user'));
     const todos = useSelector(state => state.todos.todos);
-    const taskFilterElem = useRef(null)
+    const taskFilterElem = useRef(null);
     const dispatch = useDispatch();
-    const [filteredTodos, setFilteredTodos] = useState(todos)
-    const [filterStatus, setFilterStatus] = useState('all')
+    const [isPageLoading, setIsPageLoading] = useState(true)
+    const [filteredTodos, setFilteredTodos] = useState(todos);
+    const [filterStatus, setFilterStatus] = useState('all');
+    const [isUserCreated, setIsUserCreated] = useState(true);
 
 
     function setActiveFilter(e) {
@@ -29,13 +35,23 @@ export default function TodosManager() {
     }
 
     useEffect(() => {
-        function getTodos() {
-            dispatch(getTodosReqAction());
+        async function checkUser() {
+            try {
+                const checkedUser = await getUserReq(currentUser.uid)
+
+                setIsUserCreated(checkedUser);
+
+                dispatch(getTodosReqAction(currentUser?.uid));
+
+                setIsPageLoading(false)
+            } catch {
+                setIsUserCreated(false);
+            }
         }
+        checkUser();
 
         setFilteredTodos(todos);
-        getTodos();
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         if (filterStatus === 'all') {
@@ -48,30 +64,37 @@ export default function TodosManager() {
 
     }, [todos, filterStatus]);
 
-    return (
-        <section className="tasks">
-            <Helmet title="Завдання | Just Do It" />
-            <div className="container">
-                <div className="tasks__content">
-                    <div className="tasks__head">
-                        <AddTodoForm></AddTodoForm>
-                        <div ref={taskFilterElem} className="tasks-filter" onClick={e => setActiveFilter(e)}>
-                            <button className="tasks-filter__item tasks-filter__item_active"
-                                    onClick={() => setFilterStatus('all')}>Всі
-                            </button>
-                            <button className="tasks-filter__item" onClick={() => setFilterStatus(true)}>Виконані
-                            </button>
-                            <button className="tasks-filter__item" onClick={() => setFilterStatus(false)}>У процесі
-                            </button>
+    return isUserCreated ? (
+        !isPageLoading ?
+            <>
+                <Header />
+                <section className="tasks">
+                    <Helmet title="Завдання | Just Do It" />
+                    <div className="container">
+                        <div className="tasks__content">
+                            <div className="tasks__head">
+                                <AddTodoForm></AddTodoForm>
+                                <div ref={taskFilterElem} className="tasks-filter" onClick={e => setActiveFilter(e)}>
+                                    <button className="tasks-filter__item tasks-filter__item_active"
+                                            onClick={() => setFilterStatus('all')}>Всі
+                                    </button>
+                                    <button className="tasks-filter__item" onClick={() => setFilterStatus(true)}>Виконані
+                                    </button>
+                                    <button className="tasks-filter__item" onClick={() => setFilterStatus(false)}>У процесі
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="tasks__title">
+                                <h2>Усього завдань:</h2>
+                                <p><span>{todos?.length}</span></p>
+                            </div>
+                            <TodoList filteredTodos={filteredTodos}/>
                         </div>
                     </div>
-                    <div className="tasks__title">
-                        <h2>Усього завдань:</h2>
-                        <p><span>{todos?.length}</span></p>
-                    </div>
-                    <TodoList filteredTodos={filteredTodos}/>
-                </div>
-            </div>
-        </section>
+                </section>
+            </>
+            : <div className="loader"><h2>Just Do It</h2></div>
+    ) : (
+        <Navigate replace to='/signup' />
     )
 }
