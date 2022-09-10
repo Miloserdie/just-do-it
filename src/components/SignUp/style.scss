@@ -5,6 +5,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  .error-board {
+    position: absolute;
+    top: 20px;
+    background-color: rgba(206, 46, 46, 0.84);
+    padding: 10px;
+    max-width: 600px;
+    margin: 0 5px;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
 
   &__board {
     flex: 0 1 500px;
@@ -88,8 +105,13 @@
 
   .form-item {
     display: flex;
+    position: relative;
     flex-direction: column;
     margin-bottom: 20px;
+
+    &:nth-child(3) {
+      margin-bottom: 45px;
+    }
 
     label {
       color: rgb(255, 255, 255);
@@ -110,6 +132,17 @@
         color: rgb(145, 91, 241)
       }
     }
+  }
+
+  &__error {
+    color: rgb(255, 0, 0);
+    position: absolute;
+    background-color: rgb(58, 20, 121);
+    top: 105%;
+    right: 0;
+    padding: 7px;
+    border-radius: 2px;
+    z-index: 10;
   }
 
   &__button {

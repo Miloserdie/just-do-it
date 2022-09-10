@@ -9,7 +9,7 @@ function App() {
 	<Routes>
        <Route path='' element={<Navigate replace to='signup'/>}/>
        <Route path='/signup' element={<SignUp />} />
-       <Route path='/signin' element={<SignIn />} />
+       <Route path='/signIn' element={<SignIn />} />
        <Route path='/todos' element={<TodosManager />} />
    </Routes>
   );

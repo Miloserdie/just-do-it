@@ -143,3 +143,20 @@
 		background: url('https://img.icons8.com/material-outlined/24/E74C3C/trash--v1.png') center/ contain no-repeat;
 	}
 }
+
+@media screen and (max-width:430px) {
+	.modal__top-title {
+		align-self: center;
+		margin: 0 0 10px 0;
+	}
+
+	.modal__top-head {
+		flex-direction: column;
+	}
+
+	.modal__top-btns {
+		padding: 0;
+		display: flex;
+		justify-content: space-between;
+	}
+}

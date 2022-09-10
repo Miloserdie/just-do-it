@@ -7,12 +7,12 @@ export default function Header() {
     const navigate = useNavigate();
     const auth = getAuth();
 
-    function logOut () {
-        signOut(auth);
+    async function logOut () {
+        await signOut(auth);
 
         localStorage.clear();
 
-        navigate('/signup');
+        navigate('/signIn');
     }
 
     return (

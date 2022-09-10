@@ -1,21 +1,79 @@
 import '../SignUp/style.scss'
 import {Formik, Form, Field} from 'formik'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
+import {emailAuthReq, googleAuthReq} from "../../api/authApi";
+import createUserReq from "../../api/usersApi";
+import {useState} from "react";
 
 export default function SignIn() {
+    const navigate = useNavigate();
+    const [errorBoard ,setErrorBoard] =useState('');
+    const [activeError, setActiveError] =useState('');
+
     const formInitialValues = {
         email: '',
         password: ''
     }
+
+    async function googleAuth() {
+        const res = await googleAuthReq();
+
+        await createUserReq(res.user.uid);
+
+        const user = {
+            name: res.user.displayName,
+            uid: res.user.uid
+        }
+
+        localStorage.setItem('user', JSON.stringify(user));
+
+        navigate('/todos');
+    }
+
+    async function handleSubmit({email, password}, {resetForm}) {
+        try {
+            const res = await emailAuthReq(email, password);
+
+            const user = {
+                name: res.user.displayName,
+                uid: res.user.uid
+            }
+
+            localStorage.setItem('user', JSON.stringify(user));
+
+            resetForm();
+
+            setActiveError('');
+
+            navigate('/todos');
+        } catch (error) {
+            console.log(error);
+
+            if (error.message.includes('wrong-password')) {
+                setErrorBoard('Пароль введено не вірно та нажаль змінювати його поки що не можна((  Можливо перед цим ви заходили за допомогою кнопки "Увійти через Google"?')
+
+                setActiveError('active');
+            }
+            if (error.message.includes('user-not-found')) {
+                setErrorBoard('Користувача з такою поштою не знайдено! Зареєструйтесь, або увійдіть через Google.')
+
+                setActiveError('active');
+            }
+
+        }
+    }
+
     return (
         <section className="sign">
+            <div className={`error-board ${activeError}`}>{errorBoard}</div>
             <Helmet title="Увійти | Just Do It" />
             <div className="sign__board">
                 <h2 className="sign__title">Just Do It</h2>
-                <button className="sign__google"><span>Увійти через Google</span></button>
+                <button onClick={googleAuth} className="sign__google"><span>Увійти через Google</span></button>
                 <p className="sign__or-line">АБО</p>
                 <Formik
+                    onSubmit={handleSubmit}
                     initialValues={formInitialValues}
                 >
                     {
